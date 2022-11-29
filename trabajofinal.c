@@ -11,14 +11,25 @@ int conversion();	int matrices1();
 int matrices2();	int matrices3();	
 int factoriales();	int salarios();			
 
+/*El menu principal funciona con dos ciclos do while y una serie de condicionales if. Deacuerdo a la opcion seleccionada,
+  se ejecutara una funcion, una vez realizada la funcion, el programa preguntara al usuario si desea 
+  realizar la ejecucion de otra, si es el caso, se muestra nuevamente el menu y se repite el ciclo.
+  
+  Se definieron 2 variabls:
+  1) int para almacenar la opcion de la operacion seleccionada por el usuario.
+  2) char para almacenar la entrada del usuario para repetir o no el programa.
+  */
+
 int main()
 {
 	int opcmenu;
 	char repetir;
+	//Este do se coloca para realizar el bucle de repeticion para el menu de opciones  en caso de ser necesario 	
 	do{
 		printf("*****************************************************************************************************\n");
 		printf("\t\t\t\t\tMENU DE FUNCIONES.");
 		printf("\n*****************************************************************************************************\n");	
+		//Este do realiza la evaluacion de la opcion ingresada por el usuario, si es un valor no valido retorna hasta ingresar valor valido.
 		do{	
 			printf("\n\t\tPulse el numero de la funcion que desea ejecutar, despues pulse Enter:\n\n");
 			printf("\t\t1) Triangulos\t");
@@ -58,6 +69,12 @@ int main()
 
 
 void magh();void magarea();void magang();
+
+/*El programa de trinagulos, realiza 3 diferentes operaciones de triangulos: calculo de hipotenusa, calculo de area
+  y calculo del tercer angulo de un triangulo.
+  Para ello, se emplean de igual forma dos ciclos do while, uno para verificar la opcion seleccionada sea valida
+  el otro para permitir al usuario regresar al menu de opciones del programa de triangulos. */
+
 int triangulos()
 {
 	char opc,rep;
@@ -72,9 +89,9 @@ int triangulos()
         		printf("\n\nPulse la letra de opcion seleccionada, despues pulse Enter.: ");
 	
 			scanf(" %c",&opc);
-			switch(opc)
+			switch(opc) //Se define funcion switch para evaluar opc
         		{
-                	case 'a': magh();
+                	case 'a': magh(); 
                         	break;
 
                 	case 'b': magarea();
@@ -93,7 +110,7 @@ int triangulos()
 	}while(rep!='n');
         return 0;
 }
-void magh()
+void magh() //Calcula la hipotenusa
 {
 
         float co,ca;
@@ -109,7 +126,7 @@ void magh()
 	printf("\n");
 }
 
-void magarea()
+void magarea() //Calcula el area
 {
 
         float b,h;
@@ -126,7 +143,7 @@ void magarea()
 	printf("\n");
 }
 
-void magang()
+void magang() //calcula el tercer angulo
 {
 
         float a1, a2, a3;
@@ -145,7 +162,23 @@ void magang()
 
 /*-----------------------------------------------------CODIGO RECTANGULOS-----------------------------------------------------*/
 
+/*Este programa realiza el calculo del area de rectangulos (cuadrados) y trapecios.
+  Para realizarlo se programaron 3 funciones:
+  1) Para que el usuarion ingurese los valores del rectangulo o trapecio.
+  2) La formula para el calculo del area de un rectangulo.
+  3) La formula necesaria para el calculo del area de un trapecio.
+  
+  
+  Se implementa el mismo sistema de verificacion y repeticion que en los programas anteriores.
+  
+  Se definio un array de tipo numero real que almacena 2 valores, donde se almacenara la entrada de la base
+  en el caso del rectangulo, o base meno y base mayor para el trapecio.
+  Se definio una variable para almacenar la entrada de la atura para ambos casos.
 
+  EL programa implemeta ciclos condicionales if para ejectar la secuencia  correcta en funcion de la opcion seleccionada
+
+  
+  */
 void asignavalor();void trapecio();void rectangulo();
 int rectangulos()
 {
@@ -186,7 +219,7 @@ int rectangulos()
 	}while(rep!='n');
 	return 0;
 }
-void asignavalor(float base[],float *altura,char *opcion)
+void asignavalor(float base[],float *altura,char *opcion) //Funcion para leer las medidas de rectangulos o trapecios.
 {
 	if(*opcion=='a')
 	{
@@ -217,13 +250,13 @@ void asignavalor(float base[],float *altura,char *opcion)
 	}
 
 }
-void rectangulo(float base[],float *altura)
+void rectangulo(float base[],float *altura) //realiza las operaciones necesarias para calcular el area del rectangulo y muestra el resultado en pantalla
 {
 	float area=(base[0])*(*altura);
 	printf("El area del rectangulo es: %.2f",area);
 	printf("\n\n");
 }
-void trapecio(float base[],float *altura)
+void trapecio(float base[],float *altura) //realiza las operaciones necesarias para calcular el area del trapecio  y muestra el resultado en pantalla
 {
 	float area=(base[0]+base[1])*(*altura)/2;
 	printf("El area del trapecio es: %.2f",area);
@@ -233,7 +266,16 @@ void trapecio(float base[],float *altura)
 
 /*--------------------------------------------------CODIGO CONVERSION-----------------------------------------------*/
 
-
+/*El programa realiza conversion de tremperatura entre 3 diferentes sistemas de medicion: Clecius, Farenheit y Kelvin
+  Se recicla el mismo metodo de verificacion y repeticion que en los programas previos.
+  Se declara una variable de tipo numero real para almacenar la entrada de la temperatura y realizar conversion.
+  Se programan dos funciones: para elegir que tipo de conversion se realizara y para leer la temperatura a convertir
+  
+  Se implementa funcion switch para evaluar la varable sys que contiene el tipo de conversion a realizar.
+  Segun sea el caso se ejecutaran una serie de funciones para llegar al resultado y finalmente se imprime en pantalla.
+  
+  En 3 funciones se programan las operaciones de conversion tal que: Celcuis a Kelvin ---> Kelvin a Farenheit ---> Farenheit a Celcius
+  LA idea es un sistema circular que sea capaz de recorrer todas las conversiones posibles desde cualquier punto de partida*/
 void selectsys();void define();void ctok();void ktof();void ftoc();
 int conversion()
 {
@@ -336,7 +378,23 @@ void ftoc(float *temp)
 
 /*----------------------------------------- CODIGO SUMA MATRIZ--------------------------------------------*/
 
+/*El codigo suma matrices de hasta 10x10 y muestra en pantalla en forma de matriz el resutado.
+  
+  Se recicla el mismo metodo de verificacion y repeticion que en los programas previos.
+  
+  Se utlizan 2 funciones: asignar valor para leer los contenidos de las matrices A y B y sumamatriz
+  para realizar las operaciones necesarias para obtener el resultado deseado.
 
+  Se declaran 3 arreglos de tipo float correspondientes a las matrices A,B y C, 2 variables tipo
+  entero que almacenaran la entrada del numero de filas y colunas de A y B.
+
+  La logica del programa se basa en 2 cilos for anidados para poder recorrer las posiciones de
+  las matrices (Un for para recorrer filas y otro para las columnas), de esta forma se va solicitando
+  el valor para cada posicion en A y B.
+  Para el proceso de suma se sigue la misma logica pero ahora recorriendo y llenando cada posicion 
+  de C con la suma de A y B tal que: C[i][j] = A[i][j]+B[i][j]. Finalmente se aprovecha el ciclo de 
+ llenado de la matriz C para ir imprimiendo los vvalores en pantalla con formato. 
+  */
 
 void asignvalor();
 void sumamatriz();
@@ -394,6 +452,20 @@ void sumamatriz(float a[][10],float b[][10],float c[][10],int filas,int columnas
 
 /*--------------------------------------- CODIGO MULT. MATRICES M*M DIMENSIONES -----------------------------*/
 
+/*El programa de multiplicacion de matrices evalua si dos matrices son multiplicables, las multiplica y muestra el resultado
+  Utiliza el mismo metodo de repeticion que las funciones previas.
+  Se programaron 4 funciones 
+  1) dimns: Solicita la entrada del numero de filas y columnas para A y B y evalua si son multiplicables bajo el
+  criterio de que el numero de filas de A debe ser igual al numero de columnas de B, de no cumplirse la condicion
+  se solicitara al usuario ingresar nuevamente las dimensiones de las matrices A y B.
+  2) Valores: Utiliza el mismo ciclo de llenado de matriz que en el programa suma de matrices, ahora independiente para 
+  matriz A y B.
+  3) printmat: Utiliza el mismo recorrido de matriz que en suma de matrices para mosrar en pantalla las matrices A y B con formato.
+  4) mult: Utiliza 3 ciclos for, el primero [i] recorre la caantidad de filas para A, el segundo** [j] recorre la cantidad de columnas
+  definidas para B, lo que da como resutado el recorrido del tamanno de la matriz C resultante, finalmente como  columnasA=filasB
+  se define un tercer ciclo [k] para recorrer bien sea colunmasA o filasB dado que son equivalentes, tal que suma  = suma + A[i][k]*B[k][j]
+  (Se declara e inicializa en 0 la variable suma en el segundo ciclo fo[j], para que saliendo de tercer ciclo [k] este se reestablezca
+  y no interfiera con la siguiente operacion). **Se aprovecha para imprimir con formato la matriz resultante C conforme se va llenando*/
 
 void dimns(); void valores();
 void mult(); void printmat();
@@ -526,6 +598,16 @@ void printmat(int a[][M],int b[][M],int f[],int c[])
  * 5) muestra los valores de la matriz resultante. 
  .............................................................................*/ 
 
+/*Se utiliza el mismo mecanismo de repeticion implementado en programas anteriores.
+  Se utilizan los mismos conceptos para el recorrido y llenado de la matrices que en los programas anteriores
+  para la matriz  A.
+  Se programaron 3 funciones;
+  1) dimension: para leer el numero de filas y columnas para A.
+  2) asignarvalor: para llenado de matriz A con datos ingrsados por el usuario.
+  3) transp: segun el concepto de trsanspocision las filas de una matriz pasan a ser sus columnas y viceversa,
+  se programa entonces el recorrido de A como ya se ha mencionado antes en el programa de suma de matrices,solo
+  que esta vez se invierte el orden de i<filas y j<columnas, y se llena la matriz B tal que: B=A[j][i] */
+
 void dimension();
 void asignarvalor();
 void transp();
@@ -601,7 +683,15 @@ void transp(int a[][10],int b[][10],int filas,int columnas)
 
 /*--------------------------------------------- CODIGO FACTORIALES-------------------------------------*/
 
-
+/*La funcion factoriales es una funcion de tipo recursiva, lo que quiere decir que se va a autollamar 
+  en si misma para x fin.
+  se utiliza el mismo sistema de repeticion que en los programas previos.
+  La funcion principal solicita un numero que se almacena en la variable n,
+  posterior a ello, asigna valor a variable fact = factorial(n) que es el valor que devuelve una funcion int
+  para este caso la funcion factorial utiliza el parametro n previamente definido por el usuario,
+  declara una variable f y usa un condicional if  para asignar f=1 si n==0, caso contrario asigna 
+  f=n*factorial(n-1), en este punto se hizo una llamada a si mismo una y otra vez hasta que n==0 y devolviendo
+  el valor de f.*/
 
 int factorial(int n);
 int factoriales()
@@ -648,7 +738,13 @@ int factorial( int n)
  *Ademas:
 	si el salario es <10000:
 	agregar bono de 5%.
- *Realizar diagrama de flujo, pseudocodigo y diagrama N/S.
+ *Realizar diagrama de flujo, pseudocodigo y diagrama N/S.i
+
+ Se utiliza mismo sistema de repeticion qu een los programas previos.
+ se solisita al usuario que ingrese datos del salario por hora y las horas laboradas diariamente
+ se realiza el caluclo de i.v.a y retencion antes de multiplicar por dias de trabajo mensuales 
+ se multiplica por dias de trabajo y se evalua el resultado, donde si es menor que 10,000 se calcula
+ un bono del 5% adicional"
 */
 void ingresardatos();void calculo();void bono();
 
